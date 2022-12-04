@@ -8,6 +8,7 @@ import Home from "./Pages/Home/Home";
 import QrScanner from "./Pages/QrScanner/QrScanner";
 import QrGenerator from "./Pages/QrGenerator/QrGenerator";
 import QrList from "./Pages/QrList/QrList";
+import EquipmentCreator from "./Pages/EquipmentCreator/EquipmentCreator";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home/>}  />
+        <Route path="/eqcreator" element={<EquipmentCreator/>}/>
         <Route path="/qrscanner" element={<QrScanner/>}/>
         <Route path="/qrgenerate/:equipId" element={<QrGenerator/>}/>
         <Route path="/qrlist" element={<QrList/>}/>
