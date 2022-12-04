@@ -2,6 +2,7 @@ import axios from "axios";
 import { type } from "os";
 import { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
+import { useLocation, useParams } from "react-router-dom";
 import "./QrGenerator.css";
 
 type Equipment = {
@@ -10,6 +11,10 @@ type Equipment = {
   responsibleName: string;
   avatar: string;
 };
+
+type props = {
+  equipId:number
+}
 
 var equipTest: Equipment = {
   equipmentTableId: 12 as unknown as bigint,
@@ -26,22 +31,31 @@ const QrGenerator = () => {
   const [appState, setAppState] = useState<Equipment>(equipTest);
   const [qrValue, setQrValue] = useState("");
 
+  const test = useParams();
+
+
   const dowloadQrCode = () => {
-    const canvas = (document.getElementById("qr-gr")) as HTMLCanvasElement;
-    console.log(canvas)
-    const pngUrl = canvas
-      .toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
-    let downloadLink = document.createElement("a");
-    downloadLink.href = pngUrl;
-    downloadLink.download = "QrCode.png";
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    const canvas: HTMLCanvasElement = document.getElementById(
+      "qr-gr"
+    ) as HTMLCanvasElement;
+    console.log(canvas);
+    canvas.toBlob(function (blob) {
+      const pngUrl = URL.createObjectURL(blob as Blob);
+
+      let downloadLink = document.createElement("a");
+      downloadLink.href = pngUrl;
+      downloadLink.download = "QrCode.png";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    });
   };
 
   useEffect(() => {
-    const url = "https://localhost:7124/api/Equipment/GetEquipmentById?id=12";
+    
+
+    const url = "https://localhost:7124/api/Equipment/GetEquipmentById?id=" + test.equipId;
+    console.log(url);
     axios
       .get(url)
       .then((resp) => {
@@ -51,7 +65,7 @@ const QrGenerator = () => {
       .catch((error: Error) => {
         console.log(error.message);
       });
-  }, [appState]);
+  }, [test.equipId]);
 
   return (
     <div className="mainContainer">
@@ -71,7 +85,9 @@ const QrGenerator = () => {
           className="qrCode"
           id="qr-gr"
         />
-        <button type="button" onClick={dowloadQrCode}>Download</button>
+        <button type="button" onClick={dowloadQrCode}>
+          Download
+        </button>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const Navbar = () =>{
             </Link>
             <ul>
                 <NavLink to="/qrscanner" >Qr Scanner</NavLink>
-                <NavLink to="/qrgenerate">Qr Generator</NavLink>
+                <NavLink to="/qrlist">Qr List</NavLink>
             </ul>
         </nav>
     )

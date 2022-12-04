@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import QrScanner from "./Pages/QrScanner/QrScanner";
 import QrGenerator from "./Pages/QrGenerator/QrGenerator";
+import QrList from "./Pages/QrList/QrList";
 
 function App() {
   return (
@@ -15,9 +16,10 @@ function App() {
       <div className="App"></div>
 
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<Home/>}  />
         <Route path="/qrscanner" element={<QrScanner/>}/>
-        <Route path="/qrgenerate" element={<QrGenerator/>}/>
+        <Route path="/qrgenerate/:equipId" element={<QrGenerator/>}/>
+        <Route path="/qrlist" element={<QrList/>}/>
       </Routes>
     </>
   );
