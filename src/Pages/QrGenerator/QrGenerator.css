@@ -1,0 +1,14 @@
+.mainContainer{
+    display: flex;
+    margin: 1rem;
+    justify-content: space-between;
+    flex-flow: row;
+    width: 90%;
+    margin: 2%;
+    align-items: center;   
+}
+
+.qrCode{
+    display:flex;
+    flex-flow: column;
+}
