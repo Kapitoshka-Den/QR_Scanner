@@ -13,8 +13,8 @@ type Equipment = {
 };
 
 type props = {
-  equipId:number
-}
+  equipId: number;
+};
 
 var equipTest: Equipment = {
   equipmentTableId: 12 as unknown as bigint,
@@ -33,16 +33,33 @@ const QrGenerator = () => {
 
   const test = useParams();
 
-
   const dowloadQrCode = () => {
-    const canvasUrl = (document.getElementById('qrCodeImg') as HTMLCanvasElement)?.toDataURL() ;
-    console.log(canvasUrl);
+    const canvasUrl = document.getElementById("qrCodeImg") as HTMLCanvasElement;
+    const svgData = new XMLSerializer().serializeToString(canvasUrl);
+    console.log(svgData);
+    
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx!.drawImage(img, img.width, img.height);
+      
+      const pngFile = canvas.toDataURL("image/png");
+      const downloadLink = document.createElement("a");
+      downloadLink.download = "QRCode";
+      downloadLink.href = `${pngFile}`;
+      downloadLink.click();
+    };
+    img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
   };
 
   useEffect(() => {
-    
-
-    const url = "http://89.110.53.87:5000/api/Equipment/GetEquipmentById?id=" + test.equipId;
+    const url =
+      "http://89.110.53.87:5000/api/Equipment/GetEquipmentById?id=" +
+      test.equipId;
     console.log(url);
     axios
       .get(url)

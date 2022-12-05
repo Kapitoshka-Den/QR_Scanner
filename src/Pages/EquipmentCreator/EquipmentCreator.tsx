@@ -5,11 +5,8 @@ import notFoundImg from "./notfoundimg.png";
 
 const EquipmentCreator = () => {
   const [imgSrc, setImgSrc] = useState<string>();
-  var EquipCreate = {
-    title: "",
-    name: "",
-    avatar: "",
-  };
+  const [title,setTitle] = useState<string>();
+const [name,setName] = useState<string>();
 
   let testmsg = "";
 
@@ -17,10 +14,10 @@ const EquipmentCreator = () => {
     let name = e.target.id;
 
     if (name == "title") {
-      EquipCreate.title = e.target.value;
+        setTitle(e.target.value)
     }
     if (name == "name") {
-      EquipCreate.name = e.target.value;
+        setName(e.target.value)
     }
   };
 
@@ -33,17 +30,22 @@ const EquipmentCreator = () => {
         onChange={(e) => {
           let test = e.currentTarget.files?.item(0) as File;
           if (test != null) {
-            setImgSrc(URL.createObjectURL(test));
             var reader = new FileReader();
-            reader.onload = function() {
-              var base64string = reader.result;
-              EquipCreate.avatar =
+            reader.onload = (): void => {
+              var base64string = reader.result ?? "";
+              console.log(base64string);
+
+            setImgSrc(base64string.toString());
+
+              setImgSrc(
                 base64string
-                  ?.toString()
-                  .replace("data:image/png;base64,", "") ?? "";
+                    .toString()
+                    );
+
+            console.log(imgSrc);
+
             };
             reader.readAsDataURL(test);
-            console.log(EquipCreate);
           }
         }}
       />
@@ -54,11 +56,22 @@ const EquipmentCreator = () => {
         onClick={() =>
           axios
             .post(
-              "http://89.110.53.87:5000/api/Equipment/CreateEquipment",
-              EquipCreate
+              "https://localhost:7124/api/Equipment/CreateEquipment",
+              {
+                title:title,
+                avatar:imgSrc!.replace("data:image/png;base64,", ""),
+                responsibleName:name
+
+              }
             )
             .then((response) => console.log(response.status))
-            .catch((error) => console.log(EquipCreate))
+            .catch((error) => {
+                console.log(error.message);
+                
+                console.log(imgSrc)
+                console.log(title);
+                
+            })
         }
       />
     </div>
