@@ -14,7 +14,7 @@ const QrList = () => {
   const [equipList, setEquipList] = useState<Array<Equipment>>();
 
   useEffect(() => {
-    const url = "https://localhost:7124/api/Equipment/GetEquipments";
+    const url = "http://89.110.53.87:5000/api/Equipment/GetEquipments";
 
     axios
       .get(url)
@@ -35,6 +35,7 @@ const QrList = () => {
           style={{ display: "flex", flexFlow: "row" }}
           key={equip.equipmentTableId as unknown as number}
         >
+          
           <img
             src={"data:image/png;base64," + equip.avatar}
             style={{ width: "10%" }}

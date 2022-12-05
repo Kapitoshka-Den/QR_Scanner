@@ -35,26 +35,14 @@ const QrGenerator = () => {
 
 
   const dowloadQrCode = () => {
-    const canvas: HTMLCanvasElement = document.getElementById(
-      "qr-gr"
-    ) as HTMLCanvasElement;
-    console.log(canvas);
-    canvas.toBlob(function (blob) {
-      const pngUrl = URL.createObjectURL(blob as Blob);
-
-      let downloadLink = document.createElement("a");
-      downloadLink.href = pngUrl;
-      downloadLink.download = "QrCode.png";
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    });
+    const canvasUrl = (document.getElementById('qrCode') as HTMLCanvasElement)?.toDataURL() ;
+    console.log(canvasUrl);
   };
 
   useEffect(() => {
     
 
-    const url = "https://localhost:7124/api/Equipment/GetEquipmentById?id=" + test.equipId;
+    const url = "http://89.110.53.87:5000/api/Equipment/GetEquipmentById?id=" + test.equipId;
     console.log(url);
     axios
       .get(url)
@@ -83,7 +71,7 @@ const QrGenerator = () => {
           level="H"
           size={300}
           className="qrCode"
-          id="qr-gr"
+          id="qrCode"
         />
         <button type="button" onClick={dowloadQrCode}>
           Download
