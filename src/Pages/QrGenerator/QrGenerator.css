@@ -2,7 +2,7 @@
     display: flex;
     margin: 1rem;
     justify-content: space-between;
-    flex-flow: row;
+    flex-flow: column;
     width: 90%;
     margin: 2%;
     align-items: center;   

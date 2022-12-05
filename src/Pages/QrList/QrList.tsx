@@ -30,9 +30,9 @@ const QrList = () => {
     <div>
       {equipList?.map((equip) => (
         <NavLink
-        
+
           to={"/qrgenerate/"+equip.equipmentTableId}
-          style={{ display: "flex", flexFlow: "row" }}
+          style={{ display: "flex", flexFlow: "row",margin:10 ,border:'solid black'}}
           key={equip.equipmentTableId as unknown as number}
         >
           

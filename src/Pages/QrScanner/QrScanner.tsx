@@ -36,7 +36,7 @@ const QrScanner = () => {
         <div className="result">
           <p>{data.title}</p>
           <p>{data.responsibleName}</p>
-          <img src={data.avatar} />
+          <img src={"data:image/png;base64,"+ data.avatar} />
         </div>
       )}
     </div>
