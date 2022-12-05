@@ -35,7 +35,7 @@ const QrGenerator = () => {
 
 
   const dowloadQrCode = () => {
-    const canvasUrl = (document.getElementById('qrCode') as HTMLCanvasElement)?.toDataURL() ;
+    const canvasUrl = (document.getElementById('qrCodeImg') as HTMLCanvasElement)?.toDataURL() ;
     console.log(canvasUrl);
   };
 
@@ -71,7 +71,7 @@ const QrGenerator = () => {
           level="H"
           size={300}
           className="qrCode"
-          id="qrCode"
+          id="qrCodeImg"
         />
         <button type="button" onClick={dowloadQrCode}>
           Download
