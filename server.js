@@ -2,14 +2,15 @@
 var path = require('path');
 var express = require('express');
 
+const PORT = process.env.PORT || 5001
+
 var app = express();
 
-var staticPath = path.join(__dirname, '/');
-app.use(express.static(staticPath));
+app.use(express.static(__dirname))
+app.user(express.static(path.resolve(__dirname,'build')))
 
-// Allows you to set port in the project properties.
-app.set('port', process.env.PORT || 5001);
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'build','index.html'))
+})
 
-var server = app.listen(app.get('port'), function() {
-    console.log('listening');
-});
+app.listen(PORT)
