@@ -56,7 +56,7 @@ const [name,setName] = useState<string>();
         onClick={() =>
           axios
             .post(
-              "https://localhost:7124/api/Equipment/CreateEquipment",
+              "http://89.110.53.87:5000/api/Equipment/CreateEquipment",
               {
                 title:title,
                 avatar:imgSrc!.replace("data:image/png;base64,", ""),

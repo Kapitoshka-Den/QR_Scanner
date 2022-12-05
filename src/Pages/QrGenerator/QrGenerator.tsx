@@ -23,10 +23,6 @@ var equipTest: Equipment = {
   avatar: "",
 };
 
-// let test = Buffer.from(equipTest.avatar,'base64')
-// let imgData = new Blob(test.buffer,{ type: 'application/octet-binary' });
-// let link = URL.createObjectURL(imgData);
-
 const QrGenerator = () => {
   const [appState, setAppState] = useState<Equipment>(equipTest);
   const [qrValue, setQrValue] = useState("");
@@ -84,7 +80,7 @@ const QrGenerator = () => {
       </div>
       <div className="qrCode">
         <QRCode
-          value={`https://localhost:7124/api/Equipment/GetEquipmentById?id=${appState.equipmentTableId}`}
+          value={`http://89.110.53.87:5000/api/Equipment/GetEquipmentById?id=${appState.equipmentTableId}`}
           level="H"
           size={300}
           className="qrCode"
